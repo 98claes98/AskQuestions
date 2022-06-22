@@ -10,8 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Inject dbcontext factory
-builder.Services.AddDbContextFactory<AskQuestionsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AskQuestionsDatabase")));
+// Inject dbcontext with scoped lifetime
+builder.Services.AddDbContext<AskQuestionsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AskQuestionsDatabase")));
 
 var app = builder.Build();
 
