@@ -1,3 +1,6 @@
+using API.Database;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Inject dbcontext factory
+builder.Services.AddDbContextFactory<AskQuestionsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AskQuestionsDatabase")));
 
 var app = builder.Build();
 
